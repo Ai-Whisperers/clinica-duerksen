@@ -5,7 +5,7 @@ export function LocalBusinessJsonLd() {
     "@context": "https://schema.org",
     "@type": "Dentist",
     name: BUSINESS.name,
-    description: "Clínica dental del Dr. Victor Duerksen en Asunción, Paraguay. Implantes dentales, ortodoncia, estética dental y más.",
+    description: "Clinica dental del Dr. Victor Duerksen en Asuncion, Paraguay. Implantes dentales, ortodoncia, estetica dental y mas.",
     url: BUSINESS.website,
     telephone: BUSINESS.phoneRaw,
     email: BUSINESS.email,
@@ -40,6 +40,69 @@ export function LocalBusinessJsonLd() {
       reviewCount: "50",
     },
     priceRange: "$$",
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+export function WebsiteJsonLd() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: BUSINESS.name,
+    url: BUSINESS.website,
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${BUSINESS.website}/buscar?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+export function BreadcrumbJsonLd({ items }: { items: { name: string; url?: string }[] }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      ...(item.url ? { item: item.url } : {}),
+    })),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+export function FAQJsonLd({ items }: { items: { question: string; answer: string }[] }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
   };
 
   return (

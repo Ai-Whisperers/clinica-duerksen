@@ -129,7 +129,11 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/50">
           <p>&copy; {year} Clínica Duerksen. Todos los derechos reservados.</p>
           <Link href="/privacidad" className="hover:text-white transition-colors">
-            Política de Privacidad
+            Politica de Privacidad
+          </Link>
+          <span className="hidden md:inline text-white/30">|</span>
+          <Link href="/terminos" className="hover:text-white transition-colors">
+            Terminos de Servicio
           </Link>
         </div>
       </div>

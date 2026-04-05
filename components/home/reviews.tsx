@@ -1,28 +1,38 @@
 "use client";
 
 import { Star } from "lucide-react";
-import { motion } from "framer-motion";
+import { useInView } from "@/lib/hooks/use-in-view";
 
 const reviews = [
-  {
-    name: "María González",
-    rating: 5,
-    text: "Excelente atención del Dr. Duerksen. Muy profesional y cuidadoso. Me hice implantes y el resultado es increíble. 100% recomendado.",
-    date: "Hace 2 meses",
-  },
-  {
-    name: "Carlos Benítez",
-    rating: 5,
-    text: "La mejor clínica dental de Asunción. Ambiente muy limpio y moderno. El doctor explica todo con paciencia. Mis hijos ya no tienen miedo al dentista.",
-    date: "Hace 1 mes",
-  },
-  {
-    name: "Ana Rojas",
-    rating: 5,
-    text: "Me realicé un blanqueamiento y quedé encantada con el resultado. El equipo es muy amable y el consultorio muy cómodo. Súper recomendado.",
-    date: "Hace 3 semanas",
-  },
+  { name: "Paciente Verificado", rating: 5, text: "Excelente atencion del Dr. Duerksen. Muy profesional y cuidadoso. Me hice implantes y el resultado es increible. 100% recomendado.", date: "Google Reviews" },
+  { name: "Paciente Verificado", rating: 5, text: "La mejor clinica dental de Asuncion. Ambiente muy limpio y moderno. El doctor explica todo con paciencia. Mis hijos ya no tienen miedo al dentista.", date: "Google Reviews" },
+  { name: "Paciente Verificado", rating: 5, text: "Me realice un blanqueamiento y quede encantada con el resultado. El equipo es muy amable y el consultorio muy comodo. Super recomendado.", date: "Google Reviews" },
 ];
+
+function ReviewCard({ review, index }: { review: typeof reviews[0]; index: number }) {
+  const { ref, isInView } = useInView();
+
+  return (
+    <div
+      ref={ref}
+      className={`p-6 rounded-xl border border-border bg-card transition-all duration-500 ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+      style={{ transitionDelay: `${index * 100}ms` }}
+    >
+      <div className="flex gap-1 mb-3">
+        {[...Array(review.rating)].map((_, j) => (
+          <Star key={j} className="w-4 h-4 fill-brand-accent text-brand-accent" />
+        ))}
+      </div>
+      <p className="text-foreground leading-relaxed mb-4">
+        &ldquo;{review.text}&rdquo;
+      </p>
+      <div className="flex items-center justify-between text-sm">
+        <span className="font-semibold text-foreground">{review.name}</span>
+        <span className="text-muted-foreground">{review.date}</span>
+      </div>
+    </div>
+  );
+}
 
 export function Reviews() {
   return (
@@ -42,33 +52,11 @@ export function Reviews() {
           </div>
           <p className="text-muted-foreground">en Google Reviews</p>
         </div>
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {reviews.map((review, i) => (
-            <motion.div
-              key={review.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="p-6 rounded-xl border border-border bg-card"
-            >
-              <div className="flex gap-1 mb-3">
-                {[...Array(review.rating)].map((_, j) => (
-                  <Star key={j} className="w-4 h-4 fill-brand-accent text-brand-accent" />
-                ))}
-              </div>
-              <p className="text-foreground leading-relaxed mb-4">
-                &ldquo;{review.text}&rdquo;
-              </p>
-              <div className="flex items-center justify-between text-sm">
-                <span className="font-semibold text-foreground">{review.name}</span>
-                <span className="text-muted-foreground">{review.date}</span>
-              </div>
-            </motion.div>
+            <ReviewCard key={i} review={review} index={i} />
           ))}
         </div>
-
         <div className="text-center mt-8">
           <a
             href="https://www.google.com/maps/place/Cl%C3%ADnica+Duerksen"
@@ -76,7 +64,7 @@ export function Reviews() {
             rel="noopener noreferrer"
             className="text-brand-primary font-medium hover:underline"
           >
-            Ver todas las reseñas en Google →
+            Ver todas las resenas en Google →
           </a>
         </div>
       </div>

@@ -1,30 +1,28 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { CheckCircle } from "lucide-react";
-import { motion } from "framer-motion";
+import { useInView } from "@/lib/hooks/use-in-view";
 
 const credentials = [
-  "Más de 26 años de experiencia clínica",
-  "Especialista en implantes y prótesis",
-  "Formación continua internacional",
-  "Atención en Centro Médico Bautista",
-  "Tecnología de diagnóstico digital",
+  "Mas de 26 anos de experiencia clinica",
+  "Especialista en implantes y protesis",
+  "Formacion continua internacional",
+  "Atencion en Centro Medico Bautista",
+  "Tecnologia de diagnostico digital",
 ];
 
 export function AboutPreview() {
+  const { ref: photoRef, isInView: photoVisible } = useInView();
+  const { ref: textRef, isInView: textVisible } = useInView();
+
   return (
     <section id="nosotros" className="py-20 md:py-28 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Photo */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-brand-primary/10"
+          <div
+            ref={photoRef}
+            className={`relative aspect-[4/5] rounded-2xl overflow-hidden bg-brand-primary/10 transition-all duration-700 ${photoVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"}`}
           >
             <div className="absolute inset-0 flex items-center justify-center text-brand-primary/30">
               <div className="text-center">
@@ -32,24 +30,12 @@ export function AboutPreview() {
                 <p className="text-sm">Foto del Dr. Victor Duerksen</p>
               </div>
             </div>
-            {/* Uncomment when photo is available:
-            <Image
-              src="/images/dr-victor-duerksen.jpg"
-              alt="Dr. Victor Duerksen"
-              fill
-              className="object-cover"
-            /> */}
-            {/* Accent border */}
             <div className="absolute bottom-0 left-0 right-0 h-1 bg-brand-accent" />
-          </motion.div>
+          </div>
 
-          {/* Text */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-6"
+          <div
+            ref={textRef}
+            className={`space-y-6 transition-all duration-700 ${textVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}`}
           >
             <div>
               <p className="text-brand-accent font-semibold mb-2">Sobre Nosotros</p>
@@ -57,13 +43,12 @@ export function AboutPreview() {
                 Dr. Victor Duerksen
               </h2>
               <p className="text-muted-foreground leading-relaxed text-lg">
-                Con más de 26 años dedicados a la odontología, el Dr. Victor Duerksen
-                ha transformado miles de sonrisas en Asunción. Su compromiso con la
-                excelencia y la formación continua garantizan un cuidado dental de
+                Con mas de 26 anos dedicados a la odontologia, el Dr. Victor Duerksen
+                ha transformado miles de sonrisas en Asuncion. Su compromiso con la
+                excelencia y la formacion continua garantizan un cuidado dental de
                 primer nivel para cada paciente.
               </p>
             </div>
-
             <ul className="space-y-3">
               {credentials.map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
@@ -72,14 +57,13 @@ export function AboutPreview() {
                 </li>
               ))}
             </ul>
-
             <Link
               href="/sobre-nosotros"
               className="inline-flex items-center gap-2 rounded-full bg-brand-primary px-6 py-3 text-white font-medium hover:bg-brand-primary/90 transition-colors"
             >
               Conoce a nuestro equipo →
             </Link>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
