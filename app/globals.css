@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Brand: #1B4D7A → hsl(207, 63%, 29%) */
+    --background: 0 0% 100%;
+    --foreground: 240 25% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 25% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 25% 14%;
+
+    /* Primary: #1B4D7A (deep medical blue) */
+    --primary: 207 63% 29%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary: #4A9BD9 (friendly blue) */
+    --secondary: 209 62% 57%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    /* Accent: #D4A843 (warm gold) */
+    --accent: 42 62% 55%;
+    --accent-foreground: 240 25% 14%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 207 63% 29%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--secondary));
+}

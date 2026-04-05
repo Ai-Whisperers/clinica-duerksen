@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file:
+      - .env
+    networks:
+      - traefik-public
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.clinica-duerksen.rule=Host(`clinicaduerksen.com.py`) || Host(`www.clinicaduerksen.com.py`)"
+      - "traefik.http.routers.clinica-duerksen.entrypoints=websecure"
+      - "traefik.http.routers.clinica-duerksen.tls.certresolver=letsencrypt"
+      - "traefik.http.services.clinica-duerksen.loadbalancer.server.port=3000"
+      # Redirect www to non-www
+      - "traefik.http.middlewares.clinica-www-redirect.redirectregex.regex=^https://www\\.clinicaduerksen\\.com\\.py/(.*)"
+      - "traefik.http.middlewares.clinica-www-redirect.redirectregex.replacement=https://clinicaduerksen.com.py/$${1}"
+      - "traefik.http.middlewares.clinica-www-redirect.redirectregex.permanent=true"
+      - "traefik.http.routers.clinica-duerksen.middlewares=clinica-www-redirect"
+
+networks:
+  traefik-public:
+    external: true
