@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: clinica-duerksen
     restart: unless-stopped
     env_file:
       - .env
@@ -12,16 +13,13 @@ services:
       - duerksen-net
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.clinica-duerksen.rule=Host(`clinicaduerksen.com.py`) || Host(`www.clinicaduerksen.com.py`)"
-      - "traefik.http.routers.clinica-duerksen.entrypoints=websecure"
-      - "traefik.http.routers.clinica-duerksen.tls.certresolver=letsencrypt"
-      - "traefik.http.services.clinica-duerksen.loadbalancer.server.port=3000"
-      - "traefik.http.middlewares.clinica-www-redirect.redirectregex.regex=^https://www\\.clinicaduerksen\\.com\\.py/(.*)"
-      - "traefik.http.middlewares.clinica-www-redirect.redirectregex.replacement=https://clinicaduerksen.com.py/$${1}"
-      - "traefik.http.middlewares.clinica-www-redirect.redirectregex.permanent=true"
-      - "traefik.http.routers.clinica-duerksen.middlewares=clinica-www-redirect"
+      - "traefik.docker.network=clinica-duerksen_duerksen-net"
+      - "traefik.http.routers.duerksen.rule=Host(`duerksen.sunstein.cloud`)"
+      - "traefik.http.routers.duerksen.entrypoints=websecure"
+      - "traefik.http.routers.duerksen.tls.certresolver=letsencryptresolver"
+      - "traefik.http.services.duerksen.loadbalancer.server.port=3000"
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/health"]
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:3000/api/health"]
       interval: 30s
       timeout: 5s
       retries: 3
