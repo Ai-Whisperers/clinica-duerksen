@@ -1,6 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const reasons = [
   "Consulta General",
@@ -15,6 +25,7 @@ const reasons = [
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [reason, setReason] = useState("Consulta General");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -26,18 +37,16 @@ export function ContactForm() {
       name: form.get("name") as string,
       phone: form.get("phone") as string,
       email: form.get("email") as string,
-      reason: form.get("reason") as string,
+      reason,
       message: form.get("message") as string,
-      honeypot: form.get("website") as string, // honeypot
+      honeypot: form.get("website") as string,
     };
 
-    // Honeypot check
     if (data.honeypot) {
       setStatus("success");
       return;
     }
 
-    // Basic validation
     const newErrors: Record<string, string> = {};
     if (!data.name.trim()) newErrors.name = "Nombre es requerido";
     if (!data.phone.trim()) newErrors.phone = "Telefono es requerido";
@@ -53,7 +62,6 @@ export function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-
       if (res.ok) {
         setStatus("success");
         (e.target as HTMLFormElement).reset();
@@ -71,91 +79,58 @@ export function ContactForm() {
         <div className="text-4xl mb-4">\u2705</div>
         <h3 className="text-lg font-semibold text-green-800">Mensaje enviado!</h3>
         <p className="text-green-700 mt-2">Nos pondremos en contacto contigo pronto.</p>
-        <button
-          onClick={() => setStatus("idle")}
-          className="mt-4 text-sm text-green-600 hover:underline"
-        >
+        <Button variant="link" onClick={() => setStatus("idle")} className="mt-4 text-green-600">
           Enviar otro mensaje
-        </button>
+        </Button>
       </div>
     );
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {/* Honeypot */}
       <div className="hidden" aria-hidden="true">
         <input type="text" name="website" tabIndex={-1} autoComplete="off" />
       </div>
 
       <div>
         <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1">Nombre *</label>
-        <input
-          id="name"
-          name="name"
-          type="text"
-          required
-          className="w-full rounded-lg border border-border px-4 py-2.5 text-foreground bg-background focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-colors"
-          placeholder="Tu nombre completo"
-        />
+        <Input id="name" name="name" type="text" required placeholder="Tu nombre completo" />
         {errors.name && <p className="text-sm text-red-500 mt-1">{errors.name}</p>}
       </div>
 
       <div>
         <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-1">Telefono *</label>
-        <input
-          id="phone"
-          name="phone"
-          type="tel"
-          required
-          className="w-full rounded-lg border border-border px-4 py-2.5 text-foreground bg-background focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-colors"
-          placeholder="+595 ..."
-        />
+        <Input id="phone" name="phone" type="tel" required placeholder="+595 ..." />
         {errors.phone && <p className="text-sm text-red-500 mt-1">{errors.phone}</p>}
       </div>
 
       <div>
         <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">Email</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          className="w-full rounded-lg border border-border px-4 py-2.5 text-foreground bg-background focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-colors"
-          placeholder="tu@email.com"
-        />
+        <Input id="email" name="email" type="email" placeholder="tu@email.com" />
       </div>
 
       <div>
-        <label htmlFor="reason" className="block text-sm font-medium text-foreground mb-1">Motivo</label>
-        <select
-          id="reason"
-          name="reason"
-          className="w-full rounded-lg border border-border px-4 py-2.5 text-foreground bg-background focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-colors"
-        >
-          {reasons.map((r) => (
-            <option key={r} value={r}>{r}</option>
-          ))}
-        </select>
+        <label className="block text-sm font-medium text-foreground mb-1">Motivo</label>
+        <Select value={reason} onValueChange={setReason}>
+          <SelectTrigger>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {reasons.map((r) => (
+              <SelectItem key={r} value={r}>{r}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
       <div>
         <label htmlFor="message" className="block text-sm font-medium text-foreground mb-1">Mensaje</label>
-        <textarea
-          id="message"
-          name="message"
-          rows={4}
-          className="w-full rounded-lg border border-border px-4 py-2.5 text-foreground bg-background focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-colors resize-none"
-          placeholder="Cuentanos como podemos ayudarte..."
-        />
+        <Textarea id="message" name="message" rows={4} placeholder="Cuentanos como podemos ayudarte..." />
       </div>
 
-      <button
-        type="submit"
-        disabled={status === "loading"}
-        className="w-full rounded-lg bg-brand-primary px-6 py-3 text-white font-medium hover:bg-brand-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-      >
+      <Button type="submit" disabled={status === "loading"} className="w-full bg-brand-primary hover:bg-brand-primary/90">
         {status === "loading" ? "Enviando..." : "Enviar Mensaje"}
-      </button>
+      </Button>
 
       {status === "error" && (
         <p className="text-sm text-red-500 text-center">Error al enviar. Por favor intenta de nuevo.</p>
