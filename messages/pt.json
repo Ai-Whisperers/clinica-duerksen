@@ -1,0 +1,33 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "services": "Servicos",
+    "gallery": "Galeria",
+    "about": "Sobre Nos",
+    "contact": "Contato"
+  },
+  "hero": {
+    "title": "Seu sorriso nas melhores maos",
+    "subtitle": "Mais de 26 anos de excelencia odontologica em Assuncao",
+    "cta_primary": "Agende sua consulta",
+    "cta_secondary": "Sobre nos"
+  },
+  "common": {
+    "whatsapp": "WhatsApp",
+    "call": "Ligar",
+    "learn_more": "Saiba mais",
+    "back_home": "Voltar ao inicio",
+    "loading": "Carregando...",
+    "error": "Erro",
+    "submit": "Enviar",
+    "name": "Nome",
+    "phone": "Telefone",
+    "email": "Email",
+    "message": "Mensagem"
+  },
+  "footer": {
+    "rights": "Todos os direitos reservados",
+    "privacy": "Politica de Privacidade",
+    "terms": "Termos de Servico"
+  }
+}

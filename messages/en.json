@@ -1,0 +1,33 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "gallery": "Gallery",
+    "about": "About Us",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Your Smile in the Best Hands",
+    "subtitle": "26+ years of dental excellence in Asuncion, Paraguay",
+    "cta_primary": "Book Appointment",
+    "cta_secondary": "About Us"
+  },
+  "common": {
+    "whatsapp": "WhatsApp",
+    "call": "Call",
+    "learn_more": "Learn more",
+    "back_home": "Back to home",
+    "loading": "Loading...",
+    "error": "Error",
+    "submit": "Submit",
+    "name": "Name",
+    "phone": "Phone",
+    "email": "Email",
+    "message": "Message"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  }
+}

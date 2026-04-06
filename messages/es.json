@@ -1,0 +1,33 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "services": "Servicios",
+    "gallery": "Galeria",
+    "about": "Sobre Nosotros",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "title": "Tu sonrisa en las mejores manos",
+    "subtitle": "Mas de 26 anos brindando atencion odontologica de excelencia en Asuncion",
+    "cta_primary": "Agenda tu cita",
+    "cta_secondary": "Conocenos"
+  },
+  "common": {
+    "whatsapp": "WhatsApp",
+    "call": "Llamar",
+    "learn_more": "Ver mas",
+    "back_home": "Volver al inicio",
+    "loading": "Cargando...",
+    "error": "Error",
+    "submit": "Enviar",
+    "name": "Nombre",
+    "phone": "Telefono",
+    "email": "Email",
+    "message": "Mensaje"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados",
+    "privacy": "Politica de Privacidad",
+    "terms": "Terminos de Servicio"
+  }
+}
