@@ -5,11 +5,14 @@ import { BUSINESS } from "@/lib/constants";
 const quickLinks = [
   { label: "Inicio", href: "/" },
   { label: "Servicios", href: "/servicios" },
+  { label: "Precios", href: "/precios" },
   { label: "Galeria", href: "/galeria" },
   { label: "Testimonios", href: "/testimonios" },
+  { label: "Blog", href: "/blog" },
   { label: "Sobre Nosotros", href: "/sobre-nosotros" },
   { label: "Preguntas Frecuentes", href: "/preguntas-frecuentes" },
   { label: "Primera Visita", href: "/primera-visita" },
+  { label: "Emergencia Dental", href: "/emergencia-dental" },
   { label: "Contacto", href: "/contacto" },
 ];
 
