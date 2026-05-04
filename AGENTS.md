@@ -10,8 +10,7 @@ Built with Next.js 15, TypeScript, Tailwind CSS, shadcn/ui, and Supabase.
 - **Styling**: Tailwind CSS + shadcn/ui
 - **Database**: Supabase (PostgreSQL)
 - **Email**: Resend
-- **Animations**: Framer Motion
-- **i18n**: next-intl (prepared for Spanish/Portuguese/German)
+- **Animations**: CSS (reduced-motion aware)
 - **Deployment**: Docker + Traefik
 
 ## Project Structure

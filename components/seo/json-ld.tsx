@@ -1,14 +1,20 @@
 import { BUSINESS } from "@/lib/constants";
 
+const socialUrls = [BUSINESS.socials.facebook, BUSINESS.socials.instagram, BUSINESS.socials.linkedin].filter(Boolean);
+
 export function LocalBusinessJsonLd() {
-  const schema = {
+  const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
-    "@type": "Dentist",
+    "@type": ["Dentist", "MedicalBusiness", "LocalBusiness"],
     name: BUSINESS.name,
-    description: "Clinica dental del Dr. Victor Duerksen en Asuncion, Paraguay. Implantes dentales, ortodoncia, estetica dental y mas.",
+    description:
+      "Clínica dental del Dr. Victor Duerksen en Asunción, Paraguay. Implantes dentales, ortodoncia, estética dental y más.",
     url: BUSINESS.website,
-    telephone: BUSINESS.phoneRaw,
+    telephone: BUSINESS.phone,
     email: BUSINESS.email,
+    image: `${BUSINESS.website}/images/og-image.jpg`,
+    hasMap: `https://maps.google.com/?q=${BUSINESS.geo.latitude},${BUSINESS.geo.longitude}`,
+    foundingDate: "1999",
     address: {
       "@type": "PostalAddress",
       streetAddress: BUSINESS.address.street,
@@ -40,9 +46,14 @@ export function LocalBusinessJsonLd() {
       "@type": "AggregateRating",
       ratingValue: "5.0",
       reviewCount: "50",
+      bestRating: "5",
     },
     priceRange: "$$",
   };
+
+  if (socialUrls.length > 0) {
+    schema.sameAs = socialUrls;
+  }
 
   return (
     <script
@@ -73,7 +84,11 @@ export function WebsiteJsonLd() {
   );
 }
 
-export function BreadcrumbJsonLd({ items }: { items: { name: string; url?: string }[] }) {
+export function BreadcrumbJsonLd({
+  items,
+}: {
+  items: { name: string; url?: string }[];
+}) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -93,7 +108,11 @@ export function BreadcrumbJsonLd({ items }: { items: { name: string; url?: strin
   );
 }
 
-export function FAQJsonLd({ items }: { items: { question: string; answer: string }[] }) {
+export function FAQJsonLd({
+  items,
+}: {
+  items: { question: string; answer: string }[];
+}) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",

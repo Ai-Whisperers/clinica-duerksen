@@ -12,7 +12,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=agent-net"
-      - "traefik.http.routers.duerksen.rule=Host(`duerksen.sunstein.cloud`)"
+      - "traefik.http.routers.duerksen.rule=Host(`duerksen.paragu-ai.com`) || Host(`clinicaduerksen.com.py`)"
       - "traefik.http.routers.duerksen.entrypoints=websecure"
       - "traefik.http.routers.duerksen.tls.certresolver=letsencryptresolver"
       - "traefik.http.services.duerksen.loadbalancer.server.port=3000"
