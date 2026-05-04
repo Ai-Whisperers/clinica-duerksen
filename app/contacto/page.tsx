@@ -50,7 +50,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-semibold text-foreground">Direccion</p>
-                    <p className="text-muted-foreground">{BUSINESS.address.city}, {BUSINESS.address.country}</p>
+                    <p className="text-muted-foreground">{BUSINESS.address.street}<br />{BUSINESS.address.neighborhood}, {BUSINESS.address.city}</p>
                   </div>
                 </div>
 
@@ -111,7 +111,7 @@ export default function ContactPage() {
       <section className="pb-0">
         <div className="w-full h-[400px]">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.5!2d-57.58!3d-25.28!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDE2JzQ4LjAiUyA1N8KwMzQnNDguMCJX!5e0!3m2!1ses!2spy!4v1"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1803.5!2d-57.5778!3d-25.2568!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDE1JzI0LjUiUyA1N8KwMzQnNDAuMSJX!5e0!3m2!1ses!2spy!4v1"
             width="100%"
             height="100%"
             style={{ border: 0 }}

@@ -12,11 +12,16 @@ export const BUSINESS = {
 
   // Location
   address: {
-    street: "", // To be filled
+    street: "Tte. 1ro. Silverio Molinas 1379 esq. Sacramento",
+    neighborhood: "Santísima Trinidad",
     city: "Asunción",
     state: "Central",
     country: "Paraguay",
-    zip: "",
+    zip: "001519",
+  },
+  geo: {
+    latitude: -25.2568,
+    longitude: -57.5778,
   },
 
   // Online

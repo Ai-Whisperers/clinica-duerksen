@@ -80,7 +80,8 @@ export function Footer() {
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-brand-accent" />
                 <span>
-                  {BUSINESS.address.city}, {BUSINESS.address.country}
+                  {BUSINESS.address.street}<br />
+                  {BUSINESS.address.neighborhood}, {BUSINESS.address.city}
                 </span>
               </li>
               <li>

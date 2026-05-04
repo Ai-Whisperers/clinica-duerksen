@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 const navLinks = [
   { label: "Inicio", href: "/" },
   { label: "Servicios", href: "/servicios" },
-  { label: "Galeria", href: "/galeria" },
+  { label: "Galería", href: "/galeria" },
   { label: "Sobre Nosotros", href: "/sobre-nosotros" },
   { label: "Contacto", href: "/contacto" },
 ];
@@ -30,14 +30,17 @@ export function Header() {
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
           ? "bg-white/95 backdrop-blur-md shadow-sm"
-          : "bg-white"
+          : "bg-transparent"
       )}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            <span className="text-xl md:text-2xl font-bold text-brand-primary">
+            <span className={cn(
+              "text-xl md:text-2xl font-bold transition-colors duration-300",
+              isScrolled ? "text-brand-primary" : "text-white"
+            )}>
               Clínica Duerksen
             </span>
           </Link>
@@ -48,7 +51,12 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-foreground/80 hover:text-brand-primary transition-colors"
+                className={cn(
+                  "text-sm font-medium transition-colors",
+                  isScrolled
+                    ? "text-foreground/80 hover:text-brand-primary"
+                    : "text-white/80 hover:text-white"
+                )}
               >
                 {link.label}
               </Link>
@@ -59,7 +67,12 @@ export function Header() {
           <div className="hidden md:flex items-center gap-3">
             <a
               href={`tel:${BUSINESS.phoneRaw}`}
-              className="inline-flex items-center gap-2 text-sm font-medium text-brand-primary hover:text-brand-secondary transition-colors"
+              className={cn(
+                "inline-flex items-center gap-2 text-sm font-medium transition-colors",
+                isScrolled
+                  ? "text-brand-primary hover:text-brand-secondary"
+                  : "text-white/90 hover:text-white"
+              )}
             >
               <Phone className="w-4 h-4" />
               {BUSINESS.phone}
@@ -68,7 +81,12 @@ export function Header() {
               href={`${BUSINESS.whatsapp}?text=${encodeURIComponent("Hola! Me gustaría agendar una cita en Clínica Duerksen")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-brand-primary px-5 py-2 text-sm font-medium text-white hover:bg-brand-primary/90 transition-colors"
+              className={cn(
+                "inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-medium transition-colors",
+                isScrolled
+                  ? "bg-brand-primary text-white hover:bg-brand-primary/90"
+                  : "bg-white/15 backdrop-blur-sm text-white border border-white/30 hover:bg-white/25"
+              )}
             >
               <MessageCircle className="w-4 h-4" />
               Agendar Cita
@@ -78,7 +96,10 @@ export function Header() {
           {/* Mobile Toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-foreground"
+            className={cn(
+              "md:hidden p-2 transition-colors",
+              isScrolled ? "text-foreground" : "text-white"
+            )}
             aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

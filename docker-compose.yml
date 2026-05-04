@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   web:
     build:
@@ -13,7 +11,7 @@ services:
       - duerksen-net
     labels:
       - "traefik.enable=true"
-      - "traefik.docker.network=clinica-duerksen_duerksen-net"
+      - "traefik.docker.network=agent-net"
       - "traefik.http.routers.duerksen.rule=Host(`duerksen.sunstein.cloud`)"
       - "traefik.http.routers.duerksen.entrypoints=websecure"
       - "traefik.http.routers.duerksen.tls.certresolver=letsencryptresolver"

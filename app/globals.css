@@ -1,4 +1,40 @@
-File unchanged since last read. The content from the earlier read_file result in this conversation is still current — refer to that instead of re-reading.
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 234 47% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 234 47% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 234 47% 14%;
+    --primary: 208 63% 29%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 14% 96%;
+    --secondary-foreground: 234 47% 14%;
+    --muted: 210 14% 96%;
+    --muted-foreground: 215 14% 45%;
+    --accent: 210 14% 96%;
+    --accent-foreground: 234 47% 14%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 16% 90%;
+    --input: 214 16% 90%;
+    --ring: 208 63% 29%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
 
 /* Animations */
 @keyframes fade-in-up {
@@ -12,8 +48,27 @@ File unchanged since last read. The content from the earlier read_file result in
   }
 }
 
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
 .animate-fade-in-up {
   animation: fade-in-up 0.8s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
 .animation-delay-300 {
@@ -28,10 +83,31 @@ File unchanged since last read. The content from the earlier read_file result in
 
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-in-up,
+  .animate-float,
   .animation-delay-300,
   .animation-delay-500 {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
   }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
 }

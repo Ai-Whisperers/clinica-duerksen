@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { MessageCircle, ChevronDown } from "lucide-react";
 import { BUSINESS } from "@/lib/constants";
 
@@ -10,54 +11,68 @@ export function Hero() {
 
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-      {/* Background */}
+      {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-brand-primary via-brand-primary/95 to-brand-dark" />
-      <div
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage: "url('/images/hero-bg.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
-      <div className="absolute top-20 right-20 w-72 h-72 bg-brand-accent/10 rounded-full blur-3xl" />
+      
+      {/* Background image overlay */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/hero-bg.jpg"
+          alt=""
+          fill
+          className="object-cover opacity-15 mix-blend-luminosity"
+          priority
+          sizes="100vw"
+        />
+      </div>
+      
+      {/* Decorative blurred orbs */}
+      <div className="absolute top-20 right-20 w-72 h-72 bg-brand-accent/10 rounded-full blur-3xl animate-float" />
       <div className="absolute bottom-20 left-20 w-96 h-96 bg-brand-secondary/10 rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 relative z-10 pt-20">
         <div className="text-center max-w-4xl mx-auto space-y-8 animate-fade-in-up">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 text-sm text-white/90">
+            <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
+            Más de 26 años de excelencia odontológica
+          </div>
+
+          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight tracking-tight">
             Tu sonrisa en las{" "}
             <span className="text-brand-accent">mejores manos</span>
           </h1>
-          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
-            Mas de 26 anos brindando atencion odontologica de excelencia en Asuncion
+          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
+            Atención odontológica de excelencia en Asunción. 
+            Implantes, ortodoncia, estética dental y más.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <a
               href={`${BUSINESS.whatsapp}?text=${message}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-accent px-8 py-4 text-brand-dark font-semibold text-lg hover:bg-brand-accent/90 transition-all shadow-lg hover:shadow-xl hover:scale-105"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-accent px-8 py-4 text-brand-dark font-semibold text-lg hover:bg-brand-accent/90 transition-all shadow-lg hover:shadow-xl hover:scale-105 hover:-translate-y-0.5"
             >
               <MessageCircle className="w-5 h-5" />
               Agenda tu cita
             </a>
             <a
-              href="#nosotros"
-              className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/30 px-8 py-4 text-white font-medium text-lg hover:bg-white/10 transition-all"
+              href="#servicios"
+              className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/30 backdrop-blur-sm px-8 py-4 text-white font-medium text-lg hover:bg-white/10 transition-all"
             >
-              Conocenos
+              Nuestros servicios
             </a>
           </div>
         </div>
 
         {/* Trust Bar */}
         <div className="mt-16 md:mt-20 animate-fade-in-up animation-delay-300">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 px-8 py-6 max-w-2xl mx-auto">
             {[
-              { value: "26+", label: "Anos de Experiencia" },
+              { value: "26+", label: "Años de Experiencia" },
               { value: "5.0 ★", label: "en Google" },
-              { value: "Centro Medico", label: "Bautista" },
+              { value: "Centro Médico", label: "Bautista" },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-3 text-white">
                 <div className="text-center">

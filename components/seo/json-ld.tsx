@@ -11,14 +11,16 @@ export function LocalBusinessJsonLd() {
     email: BUSINESS.email,
     address: {
       "@type": "PostalAddress",
+      streetAddress: BUSINESS.address.street,
       addressLocality: BUSINESS.address.city,
       addressRegion: BUSINESS.address.state,
+      postalCode: BUSINESS.address.zip,
       addressCountry: "PY",
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: -25.28,
-      longitude: -57.58,
+      latitude: BUSINESS.geo.latitude,
+      longitude: BUSINESS.geo.longitude,
     },
     openingHoursSpecification: [
       {
