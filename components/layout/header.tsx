@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { Menu, X, Phone, MessageCircle } from "lucide-react";
 import { BUSINESS } from "@/lib/constants";
@@ -24,6 +24,29 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Focus trap + Escape key for mobile menu
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsOpen(false);
+      }
+    },
+    []
+  );
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [isOpen, handleKeyDown]);
+
   return (
     <header
       className={cn(
@@ -37,10 +60,12 @@ export function Header() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            <span className={cn(
-              "text-xl md:text-2xl font-bold transition-colors duration-300",
-              isScrolled ? "text-brand-primary" : "text-white"
-            )}>
+            <span
+              className={cn(
+                "text-xl md:text-2xl font-bold transition-colors duration-300",
+                isScrolled ? "text-brand-primary" : "text-white"
+              )}
+            >
               Clínica Duerksen
             </span>
           </Link>
@@ -101,6 +126,7 @@ export function Header() {
               isScrolled ? "text-foreground" : "text-white"
             )}
             aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={isOpen}
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -109,6 +135,9 @@ export function Header() {
 
       {/* Mobile Slide-out Menu */}
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menú de navegación"
         className={cn(
           "md:hidden fixed inset-0 top-16 bg-white z-40 transition-transform duration-300",
           isOpen ? "translate-x-0" : "translate-x-full"
